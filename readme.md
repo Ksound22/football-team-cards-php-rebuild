@@ -20,7 +20,7 @@ Before you begin, ensure you have the following installed on your machine:
 1. **Clone the Starter Branch of the Repository**
 
    ```bash
-   git clone https://github.com/Ksound22/football-team-cards-php-rebuild/tree/starter
+   git clone https://github.com/Ksound22/football-team-cards-php-rebuild.git
    ```
 
    Or
@@ -35,7 +35,7 @@ Before you begin, ensure you have the following installed on your machine:
    composer install
    ```
 
-3. **Create a `.env` File Off the Existing `.env.example` File in the ROot**
+3. **Create a `.env` File Off the Existing `.env.example` File in the Root**
 
    ```bash
    cp .env.example .env
