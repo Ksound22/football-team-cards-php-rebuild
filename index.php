@@ -39,10 +39,10 @@ if ($position !== 'all') {
   <h1 class="title">Team stats</h1>
   <main>
     <div class="team-stats">
-      <p>Team: <span id="team"></span></p>
-      <p>Sport: <span id="sport"></span></p>
-      <p>Year: <span id="year"></span></p>
-      <p>Head coach: <span id="head-coach"></span></p>
+      <p>Team: <span id="team">Argentina Team</span></p>
+      <p>Sport: <span id="sport">Football</span></p>
+      <p>Year: <span id="year">1986</span></p>
+      <p>Head coach: <span id="head-coach">Carlos Bilardo</span></p>
     </div>
     <form method="POST" action="">
       <label class="options-label" for="players">Filter Teammates:</label>
@@ -53,7 +53,6 @@ if ($position !== 'all') {
         <option value="midfielder" <?= $position === 'midfielder' ? 'selected' : '' ?>>Midfielders</option>
         <option value="defender" <?= $position === 'defender' ? 'selected' : '' ?>>Defenders</option>
         <option value="goalkeeper" <?= $position === 'goalkeeper' ? 'selected' : '' ?>>Goalkeepers</option>
-        <option value="goalkeeper" <?= $position === 'playmaker' ? 'selected' : '' ?>>Playmakers</option>
       </select>
     </form>
     <div class="cards" id="player-cards">
