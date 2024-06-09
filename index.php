@@ -1,3 +1,14 @@
+<?php
+require_once __DIR__ . '/mongo_atlas_php_setup.php';
+
+$position = isset($_POST['position']) ? $_POST['position'] : 'all';
+
+$collection = getMongoCollection('football-team-cards', 'footballers');
+$team = $collection->findOne(['team' => 'Argentina']);
+$players = $team['players']->getArrayCopy();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,15 +31,17 @@
       <p>Year: <span id="year"></span></p>
       <p>Head coach: <span id="head-coach"></span></p>
     </div>
-    <label class="options-label" for="players">Filter Teammates:</label>
-    <select name="players" id="players">
-      <option value="all">All Players</option>
-      <option value="nickname">Nicknames</option>
-      <option value="forward">Position Forward</option>
-      <option value="midfielder">Position Midfielder</option>
-      <option value="defender">Position Defender</option>
-      <option value="goalkeeper">Position Goalkeeper</option>
-    </select>
+    <form method="POST" action="">
+      <label class="options-label" for="players">Filter Teammates:</label>
+      <select name="position" id="players" onchange="this.form.submit()">
+        <option value="all">All Players</option>
+        <option value="nickname">Nicknames</option>
+        <option value="forward">Position Forward</option>
+        <option value="midfielder">Position Midfielder</option>
+        <option value="defender">Position Defender</option>
+        <option value="goalkeeper">Position Goalkeeper</option>
+      </select>
+    </form>
     <div class="cards" id="player-cards">
       <!-- Player cards with footballers -->
     </div>
