@@ -7,6 +7,19 @@ $collection = getMongoCollection('football-team-cards', 'footballers');
 $team = $collection->findOne(['team' => 'Argentina']);
 $players = $team['players']->getArrayCopy();
 
+$filteredPlayers = $players;
+
+if ($position !== 'all') {
+  if ($position === 'nickname') {
+    $filteredPlayers = array_filter($players, function ($player) {
+      return !empty($player['nickname']);
+    });
+  } else {
+    $filteredPlayers = array_filter($players, function ($player) use ($position) {
+      return $player['position'] === $position;
+    });
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,16 +47,28 @@ $players = $team['players']->getArrayCopy();
     <form method="POST" action="">
       <label class="options-label" for="players">Filter Teammates:</label>
       <select name="position" id="players" onchange="this.form.submit()">
-        <option value="all">All Players</option>
-        <option value="nickname">Nicknames</option>
-        <option value="forward">Position Forward</option>
-        <option value="midfielder">Position Midfielder</option>
-        <option value="defender">Position Defender</option>
-        <option value="goalkeeper">Position Goalkeeper</option>
+        <option value="all" <?= $position === 'all' ? 'selected' : '' ?>>All Players</option>
+        <option value="nickname" <?= $position === 'nickname' ? 'selected' : '' ?>>Nicknames</option>
+        <option value="forward" <?= $position === 'forward' ? 'selected' : '' ?>>Forwards</option>
+        <option value="midfielder" <?= $position === 'midfielder' ? 'selected' : '' ?>>Midfielders</option>
+        <option value="defender" <?= $position === 'defender' ? 'selected' : '' ?>>Defenders</option>
+        <option value="goalkeeper" <?= $position === 'goalkeeper' ? 'selected' : '' ?>>Goalkeepers</option>
+        <option value="goalkeeper" <?= $position === 'playmaker' ? 'selected' : '' ?>>Playmakers</option>
       </select>
     </form>
     <div class="cards" id="player-cards">
-      <!-- Player cards with footballers -->
+      <?php if (empty($filteredPlayers)) : ?>
+        <p>No players found for the selected position.</p>
+      <?php else : ?>
+        <?php foreach ($filteredPlayers as $players) : ?>
+          <div class="player-card">
+            <h2><?= $players['name'] . ($players['isCaptain'] ? ' (Captain)' : '') ?></h2>
+            <p>Position: <?= $players['position'] ?></p>
+            <p>Number: <?= $players['number'] ?></p>
+            <p>Nickname: <?= !empty($players['nickname']) ? $players['nickname'] : 'N/A' ?></p>
+          </div>
+        <?php endforeach ?>
+      <?php endif ?>
     </div>
   </main>
   <footer>&copy; freeCodeCamp</footer>
