@@ -8,7 +8,7 @@
   <title>
     Learn Modern JavaScript methods by building football team cards
   </title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
@@ -30,7 +30,7 @@
       <option value="goalkeeper">Position Goalkeeper</option>
     </select>
     <div class="cards" id="player-cards">
-      <!-- Players -->
+      <!-- Player cards with footballers -->
     </div>
   </main>
   <footer>&copy; freeCodeCamp</footer>
