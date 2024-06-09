@@ -32,7 +32,7 @@ if ($position !== 'all') {
   <title>
     Learn Modern JavaScript methods by building football team cards
   </title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
