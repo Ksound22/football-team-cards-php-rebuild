@@ -1,27 +1,3 @@
-<?php
-require_once __DIR__ . '/mongo_atlas_php_setup.php';
-
-$position = isset($_POST['position']) ? $_POST['position'] : 'all';
-
-$collection = getMongoCollection('footballers', 'footballer');
-$team = $collection->findOne(['team' => 'Argentina']);
-$players = $team['players']->getArrayCopy();
-
-$filteredPlayers = $players;
-if ($position !== 'all') {
-  if ($position === 'nickname') {
-    $filteredPlayers = array_filter($players, function ($player) {
-      return !empty($player['nickname']);
-    });
-  } else {
-    $filteredPlayers = array_filter($players, function ($player) use ($position) {
-      return $player['position'] === $position;
-    });
-  }
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
