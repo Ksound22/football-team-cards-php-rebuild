@@ -5,7 +5,19 @@ $position = isset($_POST['position']) ? $_POST['position'] : 'all';
 
 $collection = getMongoCollection('football-team-cards', 'footballers');
 $team = $collection->findOne(['team' => 'Argentina']);
-$players = $team['players']->getArrayCopy();
+
+// $players = $team['players']->getArrayCopy();
+
+if ($team && isset($team['players'])) {
+  $players = $team['players']->getArrayCopy();
+  $teamName = $team['team'];
+  $sport = $team['sport'];
+  $year = $team['year'];
+  $headCoach = $team['headCoach']['coachName'];
+} else {
+  $players = [];
+  echo "No team or players found.";
+}
 
 $filteredPlayers = $players;
 
@@ -39,10 +51,10 @@ if ($position !== 'all') {
   <h1 class="title">Team stats</h1>
   <main>
     <div class="team-stats">
-      <p>Team: <span id="team">Argentina Team</span></p>
-      <p>Sport: <span id="sport">Football</span></p>
-      <p>Year: <span id="year">1986</span></p>
-      <p>Head coach: <span id="head-coach">Carlos Bilardo</span></p>
+      <p>Team: <span id="team"> <?= $teamName ?> </span></p>
+      <p>Sport: <span id="sport"> <?= $sport ?> </span></p>
+      <p>Year: <span id="year"><?= $year ?></span></p>
+      <p>Head coach: <span id="head-coach"><?= $headCoach ?></span></p>
     </div>
     <form method="POST" action="">
       <label class="options-label" for="players">Filter Teammates:</label>
@@ -53,6 +65,7 @@ if ($position !== 'all') {
         <option value="midfielder" <?= $position === 'midfielder' ? 'selected' : '' ?>>Midfielders</option>
         <option value="defender" <?= $position === 'defender' ? 'selected' : '' ?>>Defenders</option>
         <option value="goalkeeper" <?= $position === 'goalkeeper' ? 'selected' : '' ?>>Goalkeepers</option>
+        <option value="playmaker" <?= $position === 'playmaker' ? 'selected' : '' ?>>Playmakers</option>
       </select>
     </form>
     <div class="cards" id="player-cards">
