@@ -5,6 +5,7 @@ $dotenv->load();
 
 function getMongoClient()
 {
+
   return new MongoDB\Client($_ENV['MDB_URI']);
 }
 
