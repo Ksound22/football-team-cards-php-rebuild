@@ -84,7 +84,6 @@ if ($position !== 'all') {
     </div>
   </main>
   <footer>&copy; freeCodeCamp</footer>
-  <script src="script.js"></script>
 </body>
 
 </html>

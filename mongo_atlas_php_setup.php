@@ -5,13 +5,7 @@ $dotenv->load();
 
 function getMongoClient()
 {
-  $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-  $dotenv->load();
-
-
-  return new MongoDB\Client(
-    'mongodb+srv://' . $_ENV['MDB_USER'] . ':' . $_ENV['MDB_PASS'] . '@movie-list.s6r7qkr.mongodb.net/?retryWrites=true&w=majority&appName=movie-list'
-  );
+  return new MongoDB\Client($_ENV['MDB_URI']);
 }
 
 function getMongoCollection($database, $collection)
