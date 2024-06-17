@@ -42,7 +42,7 @@ if ($position !== 'all') {
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>
-    Learn Modern JavaScript methods by building football team cards
+    Learn PHP by building football team cards
   </title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
